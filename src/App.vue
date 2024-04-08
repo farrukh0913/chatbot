@@ -58,7 +58,7 @@
         </svg>
       </div>
       <div class="icon-container" @click="toggleSidebar('versions')" :class="{ 'selected': selectedContainer == 'versions' }">
-        <span class="tooltiptext">Setting</span>
+        <span class="tooltiptext">Advanced Setting</span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="34" width="34" size="24"
           color="neutral600" name="navCog">
           <path class="icon-path" fill="#2D2E2E"
@@ -70,7 +70,7 @@
         </svg>
       </div>
       <div class="icon-container"  @click="toggleSidebar('help')"  :class="{ 'selected': selectedContainer == 'help' }">
-        <span class="tooltiptext">Help</span>
+        <span class="tooltiptext">Versions</span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="34" width="34" size="24"
           color="neutral600" name="navVersions">
           <path class="icon-path" fill="#2D2E2E" d="M6 2h12v2H6V2ZM4 6h16v2H4V6ZM3 10v8h2v-6h14v8H3v2h18V10H3Z"></path>
@@ -103,8 +103,7 @@
       </div>
     </div>
 
-    <div class="sidebar-contain" v-if="isVisible">
-      <div class="sidebar">
+      <div class="sidebar" v-if="isVisible">
 
         <div class="header">
           <div class="header-body">
@@ -164,8 +163,7 @@
 
 
         <div class="textarea-div">
-          <textarea rows="8" cols="60">
-         Build and learn with AI
+          <textarea >
          </textarea>
           <div class="icons">
             <div class="three-icons">
@@ -207,7 +205,6 @@
         </div>
 
       </div>
-    </div>
   </div>
 </template>
 
@@ -225,12 +222,16 @@ export default {
       this.selectedContainer = value
       this.isVisible = !this.isVisible;
     }
+  },
+  mounted(){
+    this.toggleSidebar('linked assets')
   }
 };
 </script>
 
 
 <style scoped >
+@import './styles.scss';
 .main-container {
   min-height: 100vh;
   height: auto;
@@ -254,6 +255,9 @@ export default {
   flex-direction: column;
   align-items: center;
   height: auto;
+}
+textarea:active{
+  border: none;
 
 }
 
@@ -290,14 +294,10 @@ export default {
 .icon-container:hover .icon-path {
   fill: black;
 }
-.sidebar-contain{
-  min-height: 100vh;
-  height: auto;
-}
 .sidebar {
   width: 550px;
   min-height: 100vh;
-  height: 100%;
+  height: auto;
   background-color: #ffffff;
   border: 1px solid rgb(215, 213, 210);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 30px 0px;
@@ -319,6 +319,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  svg{
+    cursor: pointer;
+  }
 }
 
 span {
@@ -387,7 +390,8 @@ li {
   bottom: 10px;
   width: 525px;
   margin-left: 10px;
-  margin-top: 240px;
+  position: absolute;
+  bottom: 0;
 }
 
 textarea {
@@ -396,7 +400,8 @@ textarea {
 font-size:16px;
   background-color: #fafafa;
   resize: vertical;
-  max-height: 250px;
+  height: 250px !important;
+  max-height: 250px !important;
 }
 
 .icons {
@@ -428,10 +433,9 @@ font-size:16px;
   display: flex;
   justify-content: center;
   align-items: center;
- 
   background-color: black;
   color: #fff;
-  min-width: 140px;
+  min-width: 180px;
   font-size: 20px;
   border-radius: 20px;
   height: 40px;
@@ -442,5 +446,21 @@ font-size:16px;
 .icon-container:hover .tooltiptext {
   visibility: visible;
 }
+textarea:focus{
+  outline: none;
+}
 
+@media screen and (max-height: 1030px) {
+  textarea {
+    height: 70px !important;
+    max-height: 70px !important;
+    resize: none;
+  }
+
+  .textarea-div{
+    bottom: 0px;
+    position: relative;
+    margin-top: 30px;
+  }
+}
 </style>
